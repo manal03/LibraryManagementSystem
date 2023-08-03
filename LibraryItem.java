@@ -3,6 +3,11 @@ package library;
 	abstract class LibraryItem{
 		private String title;
 		private int year; 
+		
+//Created enum to output the type of book easily		
+	public enum MediaType {
+	    BOOK, DVD
+	}
 	
 	public LibraryItem(String title, int year) {
 		this.title = title; 
@@ -22,6 +27,8 @@ package library;
 	public void setTitle(String title) {
 		this.title = title;
 	}
+    public abstract MediaType getMediaType();
+
 	
 	}
 
