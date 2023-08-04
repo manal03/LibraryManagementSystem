@@ -3,51 +3,32 @@ package library;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.LibraryItem.MediaType;
+public class Library<T extends LibraryItem> {
+    private ArrayList<T> items;
 
-public class Library {
-	private ArrayList<Book> books;
-	private ArrayList<DVD> dvds; 
-	public Library() {
-		books = new ArrayList<>();
-		dvds = new ArrayList<>();
-	}
-	 
-	 public void addBook(Book book) {
-	        books.add(book);
-	    }
-	 public void addDVD(DVD dvd) {
-	        dvds.add(dvd);
-	    }
-	 public List<LibraryItem> getAllItems() {
-	        List<LibraryItem> allItems = new ArrayList<>();
-	        allItems.addAll(books);
-	        allItems.addAll(dvds);
-	        return allItems;
-	    }
-	 public void displayAllItems() {
-		    List<LibraryItem> allItems = getAllItems();
+    public Library() {
+        items = new ArrayList<>();
+    }
 
-		 System.out.println("List of all items in the library:\n");
+    public void addItem(T item) {
+        items.add(item);
+    }
 
-		    for (LibraryItem item : allItems) {
-		        MediaType mediaType = item.getMediaType();
-		        String type = (mediaType == MediaType.BOOK) ? "Book" : "DVD";
-		        if (item instanceof Book) {
-		            System.out.println(type + ": " + item.getTitle() + " - " + ((Book) item).getAuthor() + " (" + item.getYear() + ")");
-		        } else if (item instanceof DVD) {
-		            System.out.println(type + ": " + item.getTitle() + " - " + ((DVD) item).getDirector() + " (" + item.getYear() + ")");
-		        } else {
-		            System.out.println("Unknown item type.");
-		        }
-		    }
+    public List<T> getAllItems() {
+        return items;
+    }
 
-	
-	
-	
-	
-	
-	
-	
-	 }	
+    public void displayAllItems() {
+        System.out.println("List of all items in the library:\n");
+
+        for (T item : items) {
+            String type = item.getMediaType() == LibraryItem.MediaType.BOOK ? "Book" : "DVD";
+            String details = item instanceof Book
+                    ? ((Book) item).getAuthor()
+                    : (item instanceof DVD ? ((DVD) item).getDirector() : "Unknown");
+            
+            System.out.println(type + ": " + item.getTitle() + " - " + details + " (" + item.getYear() + ")");
+        }
+        System.out.println("\n");
+    }
 }

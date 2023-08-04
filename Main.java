@@ -42,7 +42,7 @@ public class Main {
                 String author = sc.nextLine();
 
                 Book newBook = new Book(title, year, author);
-                library.addBook(newBook);
+                library.addItem(newBook);
                 System.out.println("Book added successfully.");
                 break;
             case 2: 
@@ -63,7 +63,7 @@ public class Main {
                  String director = sc.nextLine();
              
                  DVD newdvd = new DVD(dvdTitle, dvdYear, director);
-                 library.addDVD(newdvd);
+                 library.addItem(newdvd);
                  System.out.println("DVD added successfully.");
                  break;
             case 3: 
